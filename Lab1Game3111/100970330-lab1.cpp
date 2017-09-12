@@ -10,6 +10,7 @@
 
 #include <windows.h>
 #include <DirectXMath.h>
+#include <DirectXPackedVector.h>
 #include <iostream>
 
 using namespace std;
@@ -29,10 +30,10 @@ ostream&  XM_CALLCONV operator << (ostream& os, FXMMATRIX m)
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		os << XMVectorGetsX(m.r[i]) << "\t";
-		os << XMVectorGetsY(m.r[i]) << "\t";
-		os << XMVectorGetsZ(m.r[i]) << "\t";
-		os << XMVectorGetsW(m.r[i]);
+		os << XMVectorGetX(m.r[i]) << "\t";
+		os << XMVectorGetY(m.r[i]) << "\t";
+		os << XMVectorGetZ(m.r[i]) << "\t";
+		os << XMVectorGetW(m.r[i]);
 		os << endl;
 	}
 	return os;
@@ -46,6 +47,16 @@ int main()
 		cout << "directx math is supported" << endl;
 		return 0;
 	}
+	XMMATRIX InverseMatrix(
+		0.0f, 0.0f, 0.0f, 0.0f,
+
+		0.0f, 0.0f, 0.0f, 0.0f,
+
+		0.0f, 0.0f, 0.0f, 0.0f,
+
+		0.0f, 0.0f, 0.0f, 0.0f
+
+	);
 	// 4X4 MATRIX
 	 XMMATRIX A
 	(  1.0f , 0.0f, 0.0f, 0.0f,
@@ -58,23 +69,30 @@ int main()
 
 	);
 
-	// XMMATRIX  B = XMMatrixIdentity();
 
-	// XMMATRIX c = A*B;
 	 
-//	 XMMATRIX D = XMMatrixDeterminant(A);
+	 XMVECTOR  det = XMMatrixDeterminant(A);
+
+	 if (XMVectorGetY(det)!= 0 ) 
+	 {
+		 InverseMatrix = XMMatrixInverse(&det, A);
+	 }
+	 else {
+	 
+		 cout << "Determinant was empty" << endl;
+	 }
+
+
 	 
 //	 XMVECTOR det = XMMatrixDeterminant(A);
 
 //	 XMMATRIX F = A * E;
 
 
-	/* cout << "A = " << endl <<  A << endl;
-	 cout << "B = " << endl << B << endl;
-	 cout << "C = A*B =  " << endl << C << endl;
-	 cout << "D =  Transpose (A) = " << endl << D << endl;
+	 cout << "A = " << endl <<  A << endl;
 	 cout << "det =  determinant(A) = " << endl << A << endl;
-	 cout << "A = " << endl << A << endl;*/
-
+	 cout << "InverseMatrix = " << endl << InverseMatrix << endl;
+	 int numblock; 
+	 cin >> numblock;
 	return 0;
 }
