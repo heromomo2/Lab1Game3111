@@ -47,7 +47,7 @@ int main()
 		cout << "directx math is supported" << endl;
 		return 0;
 	}
-	XMMATRIX InverseMatrix(
+	XMMATRIX InverseMatrix; /*(
 		0.0f, 0.0f, 0.0f, 0.0f,
 
 		0.0f, 0.0f, 0.0f, 0.0f,
@@ -56,16 +56,16 @@ int main()
 
 		0.0f, 0.0f, 0.0f, 0.0f
 
-	);
+	);*/
 	// 4X4 MATRIX
 	 XMMATRIX A
 	(  1.0f , 0.0f, 0.0f, 0.0f,
 
-		0.1f, 0.0f, 0.0f, 0.0f,
+		0.0f, 2.0f, 0.0f, 0.0f,
 
-		3.0f, 0.1f, 0.0f, 0.0f,
+		0.0f, 0.0f, 4.0f, 0.0f,
 
-		0.0f, 0.0f, 2.0f , 0.0f
+		1.0f, 2.0f, 3.0f , 1.0f
 
 	);
 
@@ -73,9 +73,13 @@ int main()
 	 
 	 XMVECTOR  det = XMMatrixDeterminant(A);
 
-	 if (XMVectorGetY(det)!= 0 ) 
+	 if (XMVectorGetX(det)!= 0 ) 
 	 {
 		 InverseMatrix = XMMatrixInverse(&det, A);
+
+		 cout << "A = " << endl << A << endl; 
+		 cout << "det =  determinant(A) = " << endl << A << endl;
+		 cout << "InverseMatrix = " << endl << InverseMatrix << endl;
 	 }
 	 else {
 	 
@@ -89,9 +93,7 @@ int main()
 //	 XMMATRIX F = A * E;
 
 
-	 cout << "A = " << endl <<  A << endl;
-	 cout << "det =  determinant(A) = " << endl << A << endl;
-	 cout << "InverseMatrix = " << endl << InverseMatrix << endl;
+	
 	 int numblock; 
 	 cin >> numblock;
 	return 0;
