@@ -39,6 +39,14 @@ ostream&  XM_CALLCONV operator << (ostream& os, FXMMATRIX m)
 	return os;
 }
 
+/*XMMATRIX Mirnor(XMMATRIX x) 
+{
+	x.r[11];
+
+
+}*/
+
+
 int main() 
 {
 	//checking for support  SSE2 (Pentium4, AMD K8, and above)
@@ -68,8 +76,8 @@ int main()
 		1.0f, 2.0f, 3.0f , 1.0f
 
 	);
-
-
+	 
+	// cout << " testout = " << endl << A.r[0]<< endl;
 	 
 	 XMVECTOR  det = XMMatrixDeterminant(A);
 
